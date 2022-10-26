@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input id="id1" type="number" min="100" max="300" required>
+        <button onclick="toCheckDef()">Check</button>
+        <br>
+        <p id="demo"></p>
+    </div>
+
+    <div>
+        <input id="id2" type="number" min="1" max="10" required>
+        <button onclick="toCheckCus()">Check</button>
+        <br>
+        <p id="demo1"></p>
+        <p id="show"></p>
+    </div>
+    
+</body>
+<script>
+    function toCheckDef(){   
+        let inputObj=document.getElementById("id1");
+        if(inputObj.checkValidity()==false){
+            document.getElementById("demo").innerHTML=inputObj.validationMessage; //預設的訊息
+        }else{
+            document.getElementById("demo").innerHTML="OK!";
+        }
+    }
+
+    function toCheckCus(){
+        let inputObj=document.getElementById("id2");
+        let str="";
+        let message=null;
+        if(isNaN(inputObj.value)){
+            str="must input number";
+        }else if(inputObj.validity.rangeUpderflow || inputObj.validity.rangeOverflow){
+            str="must input between 1 and 10"
+        }else{
+            str="OK!"
+            message=inputObj.value;
+        }
+        document.getElementById("demo1").innerHTML=str;
+        document.getElementById("show").innerHTML=message;
+        
+    }
+</script>
+</html>
